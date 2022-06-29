@@ -48,6 +48,6 @@ function myFunction3_3() {
 
 
     const undoObjectRecords = filteredMembers.map(record => Object.values(record));
-  console.log(undoObjectRecords);
+  console.log(undoObjectRecords); //[ [ 'tg001', 'Tsujike' ], [ 'tg002', 'Takahashi' ] ]
 
 }
