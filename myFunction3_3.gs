@@ -39,11 +39,15 @@ function myFunction3_3() {
   const mainKey = "id";
 
   //filteredPropertiesから必要なメンバーのみを抽出する
-  const filtered = filteredProperties.filter((member, index) => {
+  const filteredMembers = filteredProperties.filter((member, index) => {
     return member[mainKey] === membersFilter[index];
   });
 
-  console.log(filtered);
+  console.log(filteredMembers);
   //	[ { id: 'tg001', name: 'Tsujike' },  { id: 'tg002', name: 'Takahashi' } ]
+
+
+    const undoObjectRecords = filteredMembers.map(record => Object.values(record));
+  console.log(undoObjectRecords);
 
 }
