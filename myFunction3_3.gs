@@ -13,41 +13,41 @@ function myFunction3_3() {
   //membersを必要なプロパティのみでmapする
   const filteredProperties = members.map(member => {
 
-    //空のオブジェクト生成とレコードのプロパティと値を都度配列に格納
-    const newObj = {};
+    //空のオブジェクト生成とレコードのプロパティを都度配列に格納
     const keys = Object.keys(member);
-    const values = Object.values(member);
+    const newObj = {};
 
-    //全プロパティに対してループ処理
-    keys.forEach((key, index) => {
-
-      //条件要素の配列を照合しながらオブジェクトを生成
-      propertiesFilter.forEach(property => {
-        if (key === property) newObj[key] = values[index];
-      });
-
+    //条件要素の配列に対してループ処理
+    propertiesFilter.forEach(property => {
+      if (keys.includes(property)) newObj[property] = member[property];
     });
 
-    //できあがったオブジェクトをmapにreturn
+    // できあがったオブジェクトをmapにreturn
     return newObj;
   });
 
+
+  console.log(filteredProperties);
+  // [ { name: 'Tsujike', id: 'tg001' },
+  //   { name: 'Takahashi', id: 'tg002' },
+  //   { name: 'Etau', id: 'tg003' } ]
+
   //メンバーのフィルターに必要な配列を定義
-  const membersFilter = ["tg001", "tg002"];
+  const membersFilter = ["tg002", "tg001"];
 
   //フィルターがけの対象となるプロパティを指定
   const mainKey = "id";
 
-  //filteredPropertiesから必要なメンバーのみを抽出する
-  const filteredMembers = filteredProperties.filter((member, index) => {
-    return member[mainKey] === membersFilter[index];
+  //filteredPropertiesから必要なメンバー順で抽出する
+  const filteredMembers = membersFilter.map(memberId => {
+    return filteredProperties.filter(member => memberId === member[mainKey])[0];//見つかるのは1件なので[0];
   });
 
   console.log(filteredMembers);
-  //	[ { id: 'tg001', name: 'Tsujike' },  { id: 'tg002', name: 'Takahashi' } ]
+  //	[ { name: 'Takahashi', id: 'tg002' },  { name: 'Tsujike', id: 'tg001' } ]
 
-
-    const undoObjectRecords = filteredMembers.map(record => Object.values(record));
-  console.log(undoObjectRecords); //[ [ 'tg001', 'Tsujike' ], [ 'tg002', 'Takahashi' ] ]
+  const undoObjectRecords = filteredMembers.map(record => Object.values(record));
+  console.log(undoObjectRecords);
+  //[ [ 'Takahashi', 'tg002' ], [ 'Tsujike', 'tg001' ] ]
 
 }
